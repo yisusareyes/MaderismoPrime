@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Para Fer 💙</title>
+
+<!-- Tipografía Indie Flower para todo el diseño -->
+<link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --pastel-purple: #f3e5f5;
+    --pastel-blue: #e3f2fd;
+    --glass-bg: rgba(255, 255, 255, 0.75);
+    --glass-border: rgba(255, 255, 255, 0.5);
+    /* Degradado arcoiris arcoiris */
+    --rainbow-gradient: linear-gradient(to right, #ff6b6b, #feca57, #48dbfb, #ff9ff3, #54a0ff, #1dd1a1);
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, var(--pastel-purple) 0%, var(--pastel-blue) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100%;
+    font-family: 'Indie Flower', cursive; /* Fuente global */
+    color: #444;
+    overflow: hidden;
+}
+
+/* ESFERAS DE FONDO */
+.bg-circle {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(40px);
+    z-index: -1;
+    animation: float 12s infinite alternate ease-in-out;
+}
+.c1 { width: 200px; height: 200px; background: #d1c4e9; top: -10%; left: -10%; }
+.c2 { width: 180px; height: 180px; background: #bbdefb; bottom: -5%; right: -5%; animation-delay: -4s; }
+
+@keyframes float {
+    from { transform: translate(0, 0); }
+    to { transform: translate(20px, 30px); }
+}
+
+/* TARJETA */
+.story {
+    width: 90%;
+    max-width: 360px;
+    height: 85vh; 
+    max-height: 650px;
+    border-radius: 35px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* CLASE COMÚN PARA EFECTO ARCOIRIS */
+.rainbow-text {
+    background: var(--rainbow-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.15));
+    display: inline-block;
+}
+
+/* CONTENEDOR DE LA FRASE */
+.quote-container {
+    width: 100%;
+    height: 160px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    background: rgba(255,255,255,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 15px;
+    border: 1px solid rgba(255,255,255,0.3);
+    flex-shrink: 0;
+}
+
+.quote-text {
+    font-size: clamp(26px, 7vw, 30px);
+    line-height: 1.2;
+}
+
+/* NOMBRE FER */
+h2 {
+    font-size: clamp(32px, 9vw, 40px);
+    text-align: center;
+    margin: 0 0 10px 0;
+    font-weight: normal;
+}
+
+/* TEXTO DEDICATORIA */
+.text {
+    flex-grow: 1;
+    font-size: clamp(16px, 4.5vw, 19px);
+    line-height: 1.4;
+    overflow-y: auto;
+    padding-right: 8px;
+    color: #444;
+    -webkit-overflow-scrolling: touch;
+    mask-image: linear-gradient(to bottom, black 92%, transparent 100%);
+}
+
+.text p { margin-bottom: 15px; }
+
+/* FIRMA YISUS */
+.firma {
+    margin-top: 10px;
+    text-align: right;
+    font-size: 24px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+.firma .prefix {
+    color: #777;
+    font-size: 18px;
+    margin-right: 5px;
+}
+
+/* Scrollbar */
+.text::-webkit-scrollbar { width: 3px; }
+.text::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
+
+</style>
+</head>
+<body>
+
+    <div class="bg-circle c1"></div>
+    <div class="bg-circle c2"></div>
+
+    <div class="story">
+        <div class="quote-container">
+            <div class="quote-text rainbow-text">
+                Los verdaderos Héroes <br>No tienen capa, <br>Enseñan.
+            </div>
+        </div>
+
+        <h2 class="rainbow-text">Fer 💙</h2>
+
+        <div class="text">
+            <p>No es fácil encontrar las palabras correctas… porque más que una jefa, fuiste alguien que realmente marcó una etapa importante.</p>
+            <p>Gracias por tu forma de liderar, por tu humanidad, por escuchar incluso cuando no era fácil, y por acompañarnos a crecer sin juzgar.</p>
+            <p>Me quedo con mucho de ti: tu paciencia, tu empatía y la manera en que siempre buscaste lo mejor en cada uno.</p>
+            <p>Gracias por todo, Fer. Dejas huella.</p>
+        </div>
+
+        <div class="firma">
+            <span class="prefix">Atte:</span>
+            <span class="rainbow-text">Yisus</span>
+        </div>
+    </div>
+
+</body>
+</html>
