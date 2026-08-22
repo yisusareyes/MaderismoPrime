@@ -1,182 +1,727 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Para Fer 💙</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>José Madero - Querido</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(180deg, #121212 0%, #050505 50%, #000000 100%);
+      --text-main: #ffffff;
+      --text-muted: #a7a7a7;
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --font-main: 'Montserrat', sans-serif;
+      --font-card: 'Inter', sans-serif;
+    }
 
-<!-- Tipografía Indie Flower para todo el diseño -->
-<link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-<style>
-:root {
-    --pastel-purple: #f3e5f5;
-    --pastel-blue: #e3f2fd;
-    --glass-bg: rgba(255, 255, 255, 0.75);
-    --glass-border: rgba(255, 255, 255, 0.5);
-    /* Degradado arcoiris arcoiris */
-    --rainbow-gradient: linear-gradient(to right, #ff6b6b, #feca57, #48dbfb, #ff9ff3, #54a0ff, #1dd1a1);
-}
+    body {
+      font-family: var(--font-main);
+      font-weight: 200;
+      background: var(--bg-gradient);
+      background-attachment: fixed;
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 20px;
+      min-height: 100vh;
+    }
 
-* {
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
-}
+    header {
+      text-align: center;
+      margin: 40px 0 20px 0;
+    }
 
-body {
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(135deg, var(--pastel-purple) 0%, var(--pastel-blue) 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    width: 100%;
-    font-family: 'Indie Flower', cursive; /* Fuente global */
-    color: #444;
-    overflow: hidden;
-}
+    header h1 {
+      font-weight: 100;
+      font-size: 3rem;
+      letter-spacing: 10px;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+      color: #ffffff;
+    }
 
-/* ESFERAS DE FONDO */
-.bg-circle {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(40px);
-    z-index: -1;
-    animation: float 12s infinite alternate ease-in-out;
-}
-.c1 { width: 200px; height: 200px; background: #d1c4e9; top: -10%; left: -10%; }
-.c2 { width: 180px; height: 180px; background: #bbdefb; bottom: -5%; right: -5%; animation-delay: -4s; }
+    header p {
+      font-weight: 300;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
 
-@keyframes float {
-    from { transform: translate(0, 0); }
-    to { transform: translate(20px, 30px); }
-}
+    /* Pestañas de Navegación */
+    .nav-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 45px;
+    }
 
-/* TARJETA */
-.story {
-    width: 90%;
-    max-width: 360px;
-    height: 85vh; 
-    max-height: 650px;
-    border-radius: 35px;
-    background: var(--glass-bg);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid var(--glass-border);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
-    padding: 25px;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    animation: fadeInUp 0.8s ease-out;
-}
+    .tab-btn {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--card-border);
+      padding: 10px 28px;
+      border-radius: 30px;
+      font-family: var(--font-main);
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
 
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+    .tab-btn:hover {
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.4);
+    }
 
-/* CLASE COMÚN PARA EFECTO ARCOIRIS */
-.rainbow-text {
-    background: var(--rainbow-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.15));
-    display: inline-block;
-}
+    .tab-btn.active {
+      background: #ffffff;
+      color: #000000;
+      font-weight: 600;
+      border-color: #ffffff;
+    }
 
-/* CONTENEDOR DE LA FRASE */
-.quote-container {
-    width: 100%;
-    height: 160px;
-    border-radius: 20px;
-    margin-bottom: 20px;
-    background: rgba(255,255,255,0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 15px;
-    border: 1px solid rgba(255,255,255,0.3);
-    flex-shrink: 0;
-}
+    /* Contenido de las Pestañas */
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.4s ease-in-out forwards;
+    }
 
-.quote-text {
-    font-size: clamp(26px, 7vw, 30px);
-    line-height: 1.2;
-}
+    .tab-content.active {
+      display: block;
+    }
 
-/* NOMBRE FER */
-h2 {
-    font-size: clamp(32px, 9vw, 40px);
-    text-align: center;
-    margin: 0 0 10px 0;
-    font-weight: normal;
-}
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-/* TEXTO DEDICATORIA */
-.text {
-    flex-grow: 1;
-    font-size: clamp(16px, 4.5vw, 19px);
-    line-height: 1.4;
-    overflow-y: auto;
-    padding-right: 8px;
-    color: #444;
-    -webkit-overflow-scrolling: touch;
-    mask-image: linear-gradient(to bottom, black 92%, transparent 100%);
-}
+    /* Pestaña del Álbum - Minimalista Blanco y Negro */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 850px;
+      margin: 0 auto 50px auto;
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      padding: 40px;
+      border-radius: 16px;
+      border: 1px solid var(--card-border);
+    }
 
-.text p { margin-bottom: 15px; }
+    @media (min-width: 768px) {
+      .hero {
+        flex-direction: row;
+        gap: 45px;
+      }
+    }
 
-/* FIRMA YISUS */
-.firma {
-    margin-top: 10px;
-    text-align: right;
-    font-size: 24px;
-    padding-top: 10px;
-    border-top: 1px solid rgba(0,0,0,0.05);
-}
+    .cover-img {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 4px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      filter: grayscale(100%);
+      transition: filter 0.4s ease;
+    }
 
-.firma .prefix {
-    color: #777;
-    font-size: 18px;
-    margin-right: 5px;
-}
+    .cover-img:hover {
+      filter: grayscale(0%);
+    }
 
-/* Scrollbar */
-.text::-webkit-scrollbar { width: 3px; }
-.text::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
+    .album-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      margin-top: 25px;
+    }
 
-</style>
+    @media (min-width: 768px) {
+      .album-info {
+        text-align: left;
+        margin-top: 0;
+      }
+    }
+
+    .album-info h2 {
+      font-weight: 100;
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: #ffffff;
+    }
+
+    .album-description {
+      font-weight: 300;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 25px;
+      line-height: 1.7;
+    }
+
+    .countdown-container h3 {
+      font-weight: 300;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 15px;
+      letter-spacing: 2px;
+    }
+
+    .timer {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    @media (min-width: 768px) {
+      .timer {
+        justify-content: flex-start;
+      }
+    }
+
+    .time-block {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 12px 16px;
+      border-radius: 6px;
+      min-width: 70px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .time-block span {
+      display: block;
+      font-size: 1.6rem;
+      font-weight: 200;
+      color: #ffffff;
+    }
+
+    .time-block label {
+      display: block;
+      margin-top: 2px;
+      font-weight: 300;
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Reproductor Spotify Minimalista */
+    .spotify-section {
+      max-width: 850px;
+      margin: 0 auto 50px auto;
+    }
+
+    .spotify-section h2 {
+      text-align: center;
+      font-weight: 100;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #ffffff;
+    }
+
+    .spotify-container {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    /* Sección de Reflexión */
+    .reflection-section {
+      max-width: 850px;
+      margin: 0 auto 60px auto;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 40px 30px;
+      text-align: center;
+    }
+
+    .reflection-quote {
+      font-family: var(--font-card);
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: #e0e0e0;
+      line-height: 1.9;
+      letter-spacing: 0.5px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .reflection-quote p {
+      margin-bottom: 12px;
+    }
+
+    .reflection-quote p:last-child {
+      margin-bottom: 0;
+      font-weight: 400;
+      color: #ffffff;
+      margin-top: 18px;
+    }
+
+    /* Galería / Slider Minimalista B&N */
+    .slider-section {
+      max-width: 850px;
+      margin: 0 auto 60px auto;
+    }
+
+    .slider-section h2 {
+      text-align: center;
+      font-weight: 100;
+      font-size: 1.5rem;
+      margin-bottom: 25px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #ffffff;
+    }
+
+    .slider-container {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      border-radius: 12px;
+      border: 1px solid var(--card-border);
+      background: #000;
+    }
+
+    .slider-track {
+      display: flex;
+      transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+      width: 100%;
+    }
+
+    .slide {
+      min-width: 100%;
+      aspect-ratio: 16 / 9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%);
+      transition: filter 0.4s ease;
+    }
+
+    .slide img:hover {
+      filter: grayscale(0%);
+    }
+
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.6);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      font-size: 1.2rem;
+      padding: 10px 16px;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+
+    .slider-btn:hover {
+      background: #ffffff;
+      color: #000000;
+    }
+
+    .slider-btn.prev { left: 15px; }
+    .slider-btn.next { right: 15px; }
+
+    .slider-dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .dot.active {
+      background: #ffffff;
+      transform: scale(1.2);
+    }
+
+    /* Pestaña Sobre Mí */
+    .about-section {
+      display: flex;
+      justify-content: center;
+      padding: 20px 0 60px 0;
+      font-family: var(--font-card);
+    }
+
+    .profile-card {
+      width: 100%;
+      max-width: 420px;
+      background: #ffffff;
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+      position: relative;
+      color: #111111;
+    }
+
+    .profile-cover {
+      height: 240px;
+      width: 100%;
+      overflow: hidden;
+      background-color: #1a1a1a;
+    }
+
+    .profile-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .profile-card-body {
+      padding: 0 28px 32px 28px;
+    }
+
+    .profile-avatar-wrapper {
+      margin-top: -55px;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .profile-avatar-container {
+      width: 104px;
+      height: 104px;
+      border-radius: 50%;
+      background: #ffffff;
+      padding: 5px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+
+    .profile-avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .btn-follow {
+      background-color: #000000;
+      color: #ffffff;
+      text-decoration: none;
+      display: inline-block;
+      padding: 12px 28px;
+      border-radius: 100px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-follow:hover {
+      background-color: #222222;
+      transform: scale(1.02);
+    }
+
+    .profile-info {
+      margin-bottom: 20px;
+    }
+
+    .profile-name-container {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .profile-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #111111;
+    }
+
+    .verified-badge {
+      width: 18px;
+      height: 18px;
+      fill: #1d9bf0;
+    }
+
+    .profile-handle {
+      font-size: 0.92rem;
+      color: #8e8e93;
+      margin-top: 2px;
+    }
+
+    .profile-bio {
+      font-size: 0.88rem;
+      line-height: 1.55;
+      color: #333333;
+    }
+
+    .bio-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 12px;
+      color: #555555;
+      font-weight: 500;
+      margin-bottom: 12px;
+      font-size: 0.85rem;
+    }
+
+    .profile-bio p {
+      margin-bottom: 10px;
+    }
+
+    .profile-bio p:last-child {
+      margin-bottom: 0;
+    }
+  </style>
 </head>
 <body>
 
-    <div class="bg-circle c1"></div>
-    <div class="bg-circle c2"></div>
+  <header>
+    <h1>José Madero</h1>
+    <p>Nuevo Álbum — Querido</p>
+  </header>
 
-    <div class="story">
-        <div class="quote-container">
-            <div class="quote-text rainbow-text">
-                Los verdaderos Héroes <br>No tienen capa, <br>Enseñan.
+  <!-- Pestañas de Navegación -->
+  <nav class="nav-tabs">
+    <button class="tab-btn active" onclick="switchTab('album')">Álbum</button>
+    <button class="tab-btn" onclick="switchTab('sobre-mi')">Sobre mí</button>
+  </nav>
+
+  <main>
+    <!-- Pestaña 1: Álbum -->
+    <div id="tab-album" class="tab-content active">
+      <!-- Portada & Contador -->
+      <section class="hero">
+        <img class="cover-img" src="https://cdn.phototourl.com/free/2026-08-22-ef36e726-b315-4c87-a1b5-76d0e3df0533.png" alt="Portada del álbum Querido de José Madero">
+        <div class="album-info">
+          <h2>Querido</h2>
+          <p class="album-description">
+            El nuevo material discográfico de José Madero. Una obra minimalista cargada de líricas profundas y melancolía introspectiva.
+          </p>
+          
+          <div class="countdown-container">
+            <h3 id="countdown-title">Lanzamiento: 3 de Agosto de 2026</h3>
+            <div class="timer" id="timer">
+              <div class="time-block"><span id="days">00</span><label>Días</label></div>
+              <div class="time-block"><span id="hours">00</span><label>Horas</label></div>
+              <div class="time-block"><span id="minutes">00</span><label>Min</label></div>
+              <div class="time-block"><span id="seconds">00</span><label>Seg</label></div>
             </div>
+          </div>
         </div>
+      </section>
 
-        <h2 class="rainbow-text">Fer 💙</h2>
-
-        <div class="text">
-            <p>No es fácil encontrar las palabras correctas… porque más que una jefa, fuiste alguien que realmente marcó una etapa importante.</p>
-            <p>Gracias por tu forma de liderar, por tu humanidad, por escuchar incluso cuando no era fácil, y por acompañarnos a crecer sin juzgar.</p>
-            <p>Me quedo con mucho de ti: tu paciencia, tu empatía y la manera en que siempre buscaste lo mejor en cada uno.</p>
-            <p>Gracias por todo, Fer. Dejas huella.</p>
+      <!-- Reproductor Minimalista Spotify -->
+      <section class="spotify-section">
+        <h2>Lista de Reproducción</h2>
+        <div class="spotify-container">
+          <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/2Iz5JEIGCKSWrhypoqs6fs?si=XKl9DCg-R3elo3GxbrV4Qw&utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>
+      </section>
 
-        <div class="firma">
-            <span class="prefix">Atte:</span>
-            <span class="rainbow-text">Yisus</span>
+      <!-- Reflexión -->
+      <section class="reflection-section">
+        <div class="reflection-quote">
+          <p>El universo no te debe una mierda.</p>
+          <p>No hay karma cósmico, no hay premio por ser buena persona y probablemente a las estrellas les importa un carajo tu drama existencial.</p>
+          <p>Así que sé bueno sin esperar recompensa. Ayuda a alguien. Ama. Perdona. Haz lo correcto.</p>
+          <p>Porque al final, cuando todo termine, el universo ni siquiera va a recordarte.</p>
+          <p>Pero mientras estés aquí… procura no ser otro imbécil más en el planeta.</p>
         </div>
+      </section>
+
+      <!-- Galería -->
+      <section class="slider-section">
+        <h2>Galería</h2>
+        <div class="slider-container">
+          <button class="slider-btn prev" id="prevBtn" aria-label="Anterior">&#10094;</button>
+          <button class="slider-btn next" id="nextBtn" aria-label="Siguiente">&#10095;</button>
+          
+          <div class="slider-track" id="sliderTrack">
+            <div class="slide"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSO52cxhyIonrjtAAwhzLumTReg2JT1aHKXn9y9o5G8UE-MyZr99i-lUuI&s=10" alt="José Madero 1"></div>
+            <div class="slide"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxOqejHunLPmeKTd52IlbJnhDsP1SJLcRSFuDq6yfDqoU0W8XQPpQ_LmPh&s=10" alt="José Madero 2"></div>
+            <div class="slide"><img src="https://pbs.twimg.com/media/HOqV45MWkAAgcvH.jpg" alt="José Madero 3"></div>
+            <div class="slide"><img src="https://i.postimg.cc/Wpw5z6Cf/ab6761610000e5ebfd5046504bccb6ee5a79b568-(1).jpg" alt="José Madero 4"></div>
+            <div class="slide"><img src="https://punkeando.com.mx/wp-content/uploads/2026/08/Jose-Madero-QUERIDO-1-1536x1024.jpg" alt="José Madero 5"></div>
+            <div class="slide"><img src="https://s.yimg.com/lo/mysterio/api/559fa8f1e4188a2380ac309ff3a1f1167d0356e306e3d9b754b080b7a64bc0ba/lightyear_networkapi/resizefill_w1024_h683%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fes%2Fanimal_pol_tico_619%2F3a8deb20543aea5efebdfebdad974249.jpg" alt="José Madero 6"></div>
+          </div>
+        </div>
+        <div class="slider-dots" id="sliderDots"></div>
+      </section>
     </div>
 
+    <!-- Pestaña 2: Sobre Mí -->
+    <div id="tab-sobre-mi" class="tab-content">
+      <section class="about-section">
+        <div class="profile-card">
+          <div class="profile-cover">
+            <img src="https://cdn.phototourl.com/free/2026-08-22-afad7380-b295-4e3e-a7c8-7cc3c71c058f.jpg" alt="Portada de perfil">
+          </div>
+
+          <div class="profile-card-body">
+            <div class="profile-avatar-wrapper">
+              <div class="profile-avatar-container">
+                <img class="profile-avatar" src="https://cdn.phototourl.com/free/2026-08-22-10aa2646-24cb-4aef-9963-868a777af19e.png" alt="Foto de perfil">
+              </div>
+              <a href="https://www.tiktok.com/@yisusarys" target="_blank" rel="noopener noreferrer" class="btn-follow">Seguir</a>
+            </div>
+
+            <div class="profile-info">
+              <div class="profile-name-container">
+                <h2 class="profile-name">Sobre mí</h2>
+                <svg class="verified-badge" viewBox="0 0 24 24">
+                  <path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.79-3.99-4-3.99-.495 0-.965.084-1.4.238C14.55 2.475 13.18 1.6 11.6 1.6c-1.58 0-2.95.875-3.6 2.148-.435-.154-.905-.238-1.4-.238-2.21 0-3.99 1.79-3.99 4 0 .495.084.965.238 1.4C1.575 9.55.7 10.92.7 12.5c0 1.58.875 2.95 2.148 3.6-.154.435-.238.905-.238 1.4 0 2.21 1.79 3.99 4 3.99.495 0 .965-.084 1.4-.238 1.64 1.273 3.01 2.148 4.59 2.148 1.58 0 2.95-.875 3.6-2.148.435.154.905.238 1.4.238 2.21 0 3.99-1.79 3.99-4 0-.495-.084-.965-.238-1.4 1.273-.65 2.148-2.02 2.148-3.6zm-12.71 4.3l-4.5-4.5 1.41-1.41 3.09 3.09 7.09-7.09 1.41 1.41-8.5 8.5z"/>
+                </svg>
+              </div>
+              <div class="profile-handle">@yisusarys</div>
+            </div>
+
+            <div class="profile-bio">
+              <div class="bio-tags">
+                <span>📷 Fotografía</span>
+                <span>🎬 Cine</span>
+                <span>🎧 Música</span>
+                <span>🌎 Viajes</span>
+              </div>
+              <p>Godín de RH porque el capitalismo decidió que necesitaba un trabajo antes de permitirme tener una personalidad.</p>
+              <p>Juntando dinero, experiencias y evidencia para escapar de esta estúpida simulación.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    // Control de pestañas
+    function switchTab(tabName) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+      if (tabName === 'album') {
+        document.querySelectorAll('.tab-btn')[0].classList.add('active');
+        document.getElementById('tab-album').classList.add('active');
+      } else if (tabName === 'sobre-mi') {
+        document.querySelectorAll('.tab-btn')[1].classList.add('active');
+        document.getElementById('tab-sobre-mi').classList.add('active');
+      }
+    }
+
+    // Contador de tiempo
+    const targetDate = new Date("2026-08-03T00:00:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const difference = targetDate - now;
+
+      if (difference > 0) {
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+        document.getElementById("days").innerText = String(days).padStart(2, '0');
+        document.getElementById("hours").innerText = String(hours).padStart(2, '0');
+        document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
+        document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+      } else {
+        const absDiff = Math.abs(difference);
+        const days = Math.floor(absDiff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((absDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((absDiff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((absDiff % (1000 * 60)) / 1000);
+
+        document.getElementById("days").innerText = String(days).padStart(2, '0');
+        document.getElementById("hours").innerText = String(hours).padStart(2, '0');
+        document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
+        document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+        document.getElementById("countdown-title").innerText = "Tiempo desde el lanzamiento:";
+      }
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // Slider de imágenes
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const track = document.getElementById('sliderTrack');
+    const dotsContainer = document.getElementById('sliderDots');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    slides.forEach((_, index) => {
+      const dot = document.createElement('div');
+      dot.classList.add('dot');
+      if (index === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => goToSlide(index));
+      dotsContainer.appendChild(dot);
+    });
+
+    const dots = document.querySelectorAll('.dot');
+
+    function updateSlider() {
+      track.style.transform = `translateX(-${currentSlide * 100}%)`;
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentSlide);
+      });
+    }
+
+    function moveSlide(direction) {
+      currentSlide += direction;
+      if (currentSlide < 0) {
+        currentSlide = slides.length - 1;
+      } else if (currentSlide >= slides.length) {
+        currentSlide = 0;
+      }
+      updateSlider();
+    }
+
+    function goToSlide(index) {
+      currentSlide = index;
+      updateSlider();
+    }
+
+    prevBtn.addEventListener('click', () => moveSlide(-1));
+    nextBtn.addEventListener('click', () => moveSlide(1));
+
+    let autoSlide = setInterval(() => moveSlide(1), 4000);
+
+    const sliderContainer = document.querySelector('.slider-container');
+    sliderContainer.addEventListener('mouseenter', () => clearInterval(autoSlide));
+    sliderContainer.addEventListener('mouseleave', () => {
+      autoSlide = setInterval(() => moveSlide(1), 4000);
+    });
+  </script>
 </body>
 </html>
