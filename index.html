@@ -3,26 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>José Madero - Querido & Yisus A.R.</title>
+  <title>José Madero - Querido</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
-    /* Estilos Globales y Variables para el Álbum */
     :root {
       --bg-gradient: linear-gradient(180deg, #121212 0%, #050505 50%, #000000 100%);
       --text-main: #ffffff;
       --text-muted: #a7a7a7;
       --card-bg: rgba(255, 255, 255, 0.03);
       --card-border: rgba(255, 255, 255, 0.1);
+      --time-bg: rgba(255, 255, 255, 0.05);
+      --slider-bg: #000;
+      --btn-slider-bg: rgba(0, 0, 0, 0.6);
+      --btn-slider-color: #ffffff;
       --font-main: 'Montserrat', sans-serif;
+    }
+
+    [data-theme="light"] {
+      --bg-gradient: linear-gradient(180deg, #f5f5f7 0%, #e8e8ed 50%, #dedee3 100%);
+      --text-main: #1d1d1f;
+      --text-muted: #6e6e73;
+      --card-bg: rgba(255, 255, 255, 0.7);
+      --card-border: rgba(0, 0, 0, 0.08);
+      --time-bg: rgba(0, 0, 0, 0.04);
+      --slider-bg: #e0e0e0;
+      --btn-slider-bg: rgba(255, 255, 255, 0.8);
+      --btn-slider-color: #1d1d1f;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
     }
 
     body {
@@ -34,11 +50,43 @@
       line-height: 1.6;
       padding: 20px;
       min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Botón de Cambio de Tema */
+    .theme-toggle-container {
+      position: absolute;
+      top: 25px;
+      right: 25px;
+      z-index: 100;
+    }
+
+    .theme-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      backdrop-filter: blur(10px);
+    }
+
+    .theme-btn:hover {
+      transform: scale(1.05);
     }
 
     header {
       text-align: center;
-      margin: 30px 0 15px 0;
+      margin: 30px 0 35px 0;
+      position: relative;
     }
 
     header h1 {
@@ -47,7 +95,7 @@
       letter-spacing: 8px;
       text-transform: uppercase;
       margin-bottom: 5px;
-      color: #ffffff;
+      color: var(--text-main);
     }
 
     header p {
@@ -58,56 +106,10 @@
       text-transform: uppercase;
     }
 
-    /* Pestañas de Navegación */
-    .nav-tabs {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 30px;
+    main {
+      flex: 1;
     }
 
-    .tab-btn {
-      background: transparent;
-      color: var(--text-muted);
-      border: 1px solid var(--card-border);
-      padding: 8px 22px;
-      border-radius: 20px;
-      font-family: var(--font-main);
-      font-size: 0.75rem;
-      font-weight: 400;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .tab-btn:hover {
-      color: #ffffff;
-      border-color: rgba(255, 255, 255, 0.4);
-    }
-
-    .tab-btn.active {
-      background: #ffffff;
-      color: #000000;
-      font-weight: 600;
-      border-color: #ffffff;
-    }
-
-    .tab-content {
-      display: none;
-      animation: fadeIn 0.4s ease-in-out forwards;
-    }
-
-    .tab-content.active {
-      display: block;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Secciones de la Pestaña Álbum */
     .hero {
       display: flex;
       flex-direction: column;
@@ -119,6 +121,7 @@
       padding: 40px;
       border-radius: 16px;
       border: 1px solid var(--card-border);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.03);
     }
 
     @media (min-width: 768px) {
@@ -132,7 +135,7 @@
       width: 100%;
       max-width: 300px;
       border-radius: 4px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
       filter: grayscale(100%);
       transition: filter 0.4s ease;
     }
@@ -163,7 +166,7 @@
       margin-bottom: 15px;
       letter-spacing: 6px;
       text-transform: uppercase;
-      color: #ffffff;
+      color: var(--text-main);
     }
 
     .album-description {
@@ -196,19 +199,19 @@
     }
 
     .time-block {
-      background: rgba(255, 255, 255, 0.05);
+      background: var(--time-bg);
       padding: 12px 16px;
       border-radius: 6px;
       min-width: 70px;
       text-align: center;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--card-border);
     }
 
     .time-block span {
       display: block;
       font-size: 1.6rem;
       font-weight: 200;
-      color: #ffffff;
+      color: var(--text-main);
     }
 
     .time-block label {
@@ -262,14 +265,14 @@
       margin-bottom: 20px;
       letter-spacing: 4px;
       text-transform: uppercase;
-      color: #ffffff;
+      color: var(--text-main);
     }
 
     .spotify-container {
       border-radius: 12px;
       overflow: hidden;
       border: 1px solid var(--card-border);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     }
 
     .reflection-section {
@@ -278,13 +281,14 @@
       border-radius: 16px;
       padding: 40px 30px;
       text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.03);
     }
 
     .reflection-quote {
       font-family: 'Inter', sans-serif;
       font-size: 0.95rem;
       font-weight: 300;
-      color: #e0e0e0;
+      color: var(--text-muted);
       line-height: 1.9;
       letter-spacing: 0.5px;
       max-width: 700px;
@@ -298,7 +302,7 @@
     .reflection-quote p:last-child {
       margin-bottom: 0;
       font-weight: 400;
-      color: #ffffff;
+      color: var(--text-main);
       margin-top: 18px;
     }
 
@@ -308,7 +312,7 @@
       overflow: hidden;
       border-radius: 12px;
       border: 1px solid var(--card-border);
-      background: #000;
+      background: var(--slider-bg);
     }
 
     .slider-track {
@@ -323,7 +327,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #000;
+      background: var(--slider-bg);
     }
 
     .slide img {
@@ -342,9 +346,9 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(0, 0, 0, 0.6);
-      color: #ffffff;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: var(--btn-slider-bg);
+      color: var(--btn-slider-color);
+      border: 1px solid var(--card-border);
       font-size: 1.2rem;
       padding: 10px 16px;
       cursor: pointer;
@@ -354,8 +358,8 @@
     }
 
     .slider-btn:hover {
-      background: #ffffff;
-      color: #000000;
+      background: var(--text-main);
+      color: var(--bg-gradient);
     }
 
     .slider-btn.prev { left: 15px; }
@@ -371,812 +375,137 @@
     .dot {
       width: 8px;
       height: 8px;
-      background: rgba(255, 255, 255, 0.2);
+      background: var(--card-border);
       border-radius: 50%;
       cursor: pointer;
       transition: all 0.3s;
     }
 
     .dot.active {
-      background: #ffffff;
+      background: var(--text-main);
       transform: scale(1.2);
     }
 
-    /* ----------------------------------------------------
-       Estilos de la Tarjeta "Sobre Mí" (Scope Encapsulado)
-       ---------------------------------------------------- */
-    .about-wrapper {
-      --profile-card-bg: #121212;
-      --profile-text-primary: #f2f2f7;
-      --profile-text-secondary: #d1d1d6;
-      --profile-text-muted: #8e8e93;
-      --tag-bg: #1c1c1e;
-      --kpi-bg: #18181a;
-      --border-color: #2c2c2e;
-      --shadow: 0 20px 40px rgba(0,0,0,0.8);
-      --icon-color: #f2f2f7;
-      --btn-bg: #ffffff;
-      --btn-text: #000000;
-      --btn-hover: #e5e5ea;
-      --footer-bg: #18181a;
-      --player-bg: #000000;
-      --player-item-bg: #18181a;
-      --player-item-hover: #27272a;
-      --player-item-active: #3f3f46;
-      --player-text: #ffffff;
-      --player-text-muted: #a1a1aa;
-
-      display: flex;
-      justify-content: center;
-      padding: 10px 0 60px 0;
-      font-family: 'Inter', sans-serif;
-    }
-
-    .about-wrapper[data-theme="light"] {
-      --profile-card-bg: #ffffff;
-      --profile-text-primary: #1c1c1e;
-      --profile-text-secondary: #3a3a3c;
-      --profile-text-muted: #8e8e93;
-      --tag-bg: #f2f2f7;
-      --kpi-bg: #fafafa;
-      --border-color: #f2f2f7;
-      --shadow: 0 20px 40px rgba(0,0,0,0.3);
-      --icon-color: #1c1c1e;
-      --btn-bg: #000000;
-      --btn-text: #ffffff;
-      --btn-hover: #2c2c2e;
-      --footer-bg: #fafafa;
-    }
-
-    .profile-card {
-      background-color: var(--profile-card-bg);
-      width: 100%;
-      max-width: 480px;
-      border-radius: 24px;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      position: relative;
-      color: var(--profile-text-primary);
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    .banner {
-      height: 450px;
-      position: relative;
-      background-image: url('https://i.postimg.cc/XJG6W0Cz/Picsart-26-08-25-02-33-12-907.jpg');
-      background-size: cover;
-      background-position: center;
-    }
-
-    .banner-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.7));
-    }
-
-    .top-icons {
-      position: absolute;
-      top: 18px;
-      right: 18px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      z-index: 2;
-    }
-
-    .top-icons a, .theme-toggle-btn {
-      color: #ffffff;
-      font-size: 16px;
-      text-decoration: none;
-      opacity: 0.9;
-      transition: opacity 0.2s, transform 0.2s;
-      background: rgba(0, 0, 0, 0.4);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      backdrop-filter: blur(4px);
-    }
-
-    .top-icons a:hover, .theme-toggle-btn:hover {
-      opacity: 1;
-      transform: scale(1.05);
-    }
-
-    .profile-header {
-      padding: 0 24px;
-      position: relative;
-      margin-top: -45px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-bottom: 20px;
-    }
-
-    .avatar-container {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      background-color: #000000;
-      border: 3px solid var(--profile-card-bg);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      z-index: 2;
-      flex-shrink: 0;
-    }
-
-    .btn-follow {
-      background-color: var(--btn-bg);
-      color: var(--btn-text);
-      text-decoration: none;
-      padding: 8px 18px;
-      border-radius: 40px;
-      font-weight: 500;
-      font-size: 13px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: background-color 0.2s;
-    }
-
-    .btn-follow:hover {
-      background-color: var(--btn-hover);
-    }
-
-    .profile-body {
-      padding: 0 24px 24px 24px;
-    }
-
-    .user-name {
-      font-size: 21px;
-      font-weight: 700;
-      color: var(--profile-text-primary);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      letter-spacing: -0.3px;
-    }
-
-    .verified-badge {
-      color: var(--profile-text-primary);
-      font-size: 15px;
-    }
-
-    .user-handle {
-      font-size: 13.5px;
-      color: var(--profile-text-muted);
-      margin-bottom: 16px;
-      font-weight: 400;
-    }
-
-    .bio {
-      font-size: 13.5px;
-      line-height: 1.5;
-      color: var(--profile-text-secondary);
-      margin-bottom: 24px;
-    }
-
-    .bio p {
-      margin-bottom: 12px;
-    }
-
-    .bio strong {
-      color: var(--profile-text-primary);
-    }
-
-    .interests-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin: 14px 0;
-    }
-
-    .tag {
-      background-color: var(--tag-bg);
-      color: var(--profile-text-primary);
-      font-size: 12px;
-      font-weight: 500;
-      padding: 5px 12px;
-      border-radius: 16px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .tag i {
-      font-size: 11px;
-      color: var(--profile-text-secondary);
-    }
-
-    .kpi-box {
-      background-color: var(--kpi-bg);
-      border-left: 2px solid var(--profile-text-primary);
-      padding: 10px 14px;
-      border-radius: 0 6px 6px 0;
-      margin-top: 14px;
-      font-size: 12.5px;
-      color: var(--profile-text-secondary);
-    }
-
-    .kpi-box strong {
-      color: var(--profile-text-primary);
-    }
-
-    .divider {
-      height: 1px;
-      background-color: var(--border-color);
-      margin: 22px 0;
-    }
-
-    .section-title {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--profile-text-primary);
-      margin-bottom: 14px;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .section-title i {
-      font-size: 14px;
-      color: var(--icon-color);
-    }
-
-    .spotify-profile-container {
-      border-radius: 12px;
-      overflow: hidden;
-      margin-bottom: 20px;
-      background-color: #000000;
-    }
-
-    .carousel-container {
-      position: relative;
-      width: 100%;
-      height: 240px;
-      border-radius: 14px;
-      overflow: hidden;
-      margin-bottom: 20px;
-      background-color: #000000;
-      touch-action: pan-y;
-    }
-
-    .carousel-track {
-      display: flex;
-      width: 100%;
-      height: 100%;
-      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-    }
-
-    .carousel-slide {
-      min-width: 100%;
-      height: 100%;
-      position: relative;
-    }
-
-    .carousel-slide img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .carousel-caption {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 10px 14px;
-      background: linear-gradient(transparent, rgba(0,0,0,0.8));
-      color: #ffffff;
-      font-size: 12px;
-      font-weight: 400;
-    }
-
-    .carousel-dots {
-      position: absolute;
-      bottom: 10px;
-      right: 12px;
-      display: flex;
-      gap: 4px;
-      z-index: 3;
-      max-width: 80%;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .dot-carousel {
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background-color: rgba(255, 255, 255, 0.35);
-      cursor: pointer;
-      transition: background-color 0.2s, transform 0.2s;
-    }
-
-    .dot-carousel.active {
-      background-color: #ffffff;
-      transform: scale(1.3);
-    }
-
-    .about-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .about-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      font-size: 13px;
-      line-height: 1.4;
-      color: var(--profile-text-secondary);
-    }
-
-    .about-item i {
-      font-size: 13px;
-      color: var(--icon-color);
-      margin-top: 2px;
-      width: 16px;
+    /* Pie de Página */
+    footer {
       text-align: center;
+      padding: 24px 20px;
+      margin-top: 40px;
+      border-top: 1px solid var(--card-border);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      letter-spacing: 1px;
     }
 
-    .about-item-label {
-      font-weight: 600;
-      color: var(--profile-text-primary);
-    }
-
-    .clean-player-container {
-      border-radius: 14px;
-      overflow: hidden;
-      margin-bottom: 20px;
-      background-color: var(--player-bg);
-      border: 1px solid var(--border-color);
-    }
-
-    .clean-video-frame {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 9 / 16;
-      max-height: 580px;
-      background-color: #000000;
-      overflow: hidden;
-    }
-
-    .clean-video-frame iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      display: block;
-    }
-
-    .clean-playlist {
-      max-height: 200px;
-      overflow-y: auto;
-      background-color: var(--player-bg);
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      padding: 4px;
-    }
-
-    .playlist-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 14px;
-      background-color: var(--player-item-bg);
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.2s;
-      color: var(--player-text);
-      font-size: 12.5px;
-    }
-
-    .playlist-item:hover {
-      background-color: var(--player-item-hover);
-    }
-
-    .playlist-item.active {
-      background-color: var(--player-item-active);
-      font-weight: 600;
-    }
-
-    .play-icon {
-      width: 14px;
-      height: 14px;
-      fill: var(--player-text-muted);
-    }
-
-    .playlist-item.active .play-icon {
-      fill: var(--player-text);
-    }
-
-    .card-footer {
-      text-align: center;
-      padding: 16px 24px;
-      background-color: var(--footer-bg);
-      border-top: 1px solid var(--border-color);
-      font-size: 11.5px;
-      color: var(--profile-text-muted);
-    }
-
-    .card-footer strong {
-      color: var(--profile-text-primary);
-      font-weight: 600;
+    footer strong {
+      color: var(--text-main);
+      font-weight: 500;
     }
   </style>
 </head>
-<body>
+<body data-theme="dark">
+
+  <div class="theme-toggle-container">
+    <button class="theme-btn" id="themeToggleBtn" aria-label="Cambiar modo de color">
+      <i class="fa-solid fa-moon" id="themeIcon"></i>
+    </button>
+  </div>
 
   <header>
     <h1>José Madero</h1>
     <p>Nuevo Álbum — Querido</p>
   </header>
 
-  <!-- Pestañas de Navegación Compactas -->
-  <nav class="nav-tabs">
-    <button class="tab-btn active" onclick="switchTab('album')">Álbum</button>
-    <button class="tab-btn" onclick="switchTab('sobre-mi')">Sobre mí</button>
-  </nav>
-
   <main>
-    <!-- Pestaña 1: Álbum -->
-    <div id="tab-album" class="tab-content active">
-      <section class="hero">
-        <img class="cover-img" src="https://cdn.phototourl.com/free/2026-08-22-ef36e726-b315-4c87-a1b5-76d0e3df0533.png" alt="Portada del álbum Querido de José Madero">
-        <div class="album-info">
-          <h2>Querido</h2>
-          <p class="album-description">
-           Hay discos que se escuchan… <br>y hay discos que parecen confesiones.<br><br>
+    <section class="hero">
+      <img class="cover-img" src="https://cdn.phototourl.com/free/2026-08-22-ef36e726-b315-4c87-a1b5-76d0e3df0533.png" alt="Portada del álbum Querido de José Madero">
+      <div class="album-info">
+        <h2>Querido</h2>
+        <p class="album-description">
+         Hay discos que se escuchan… <br>y hay discos que parecen confesiones.<br><br>
 José Madero ha dejado entrever que su próximo álbum será uno de sus trabajos más personales. Y si algo sabemos, es que cuando José habla desde ese lugar, vienen canciones cargadas de nostalgia, amor, desamor, apoyo y esa pequeña dosis de esperanza que aparece cuando todo parece perdido.<br><br> 
 Quizá este disco no venga a salvarnos.<br><br>
 Quizá venga a decirnos que <br>está bien no estar bien.<br><br>
-¿Estamos preparados para lo que viene?. <br><br></p>
-          
-          <div class="countdown-container">
-            <h3 id="countdown-title">Lanzamiento: 3 de Septiembre de 2026</h3>
-            <div class="timer" id="timer">
-              <div class="time-block"><span id="days">00</span><label>Días</label></div>
-              <div class="time-block"><span id="hours">00</span><label>Horas</label></div>
-              <div class="time-block"><span id="minutes">00</span><label>Min</label></div>
-              <div class="time-block"><span id="seconds">00</span><label>Seg</label></div>
-            </div>
-          </div>
-
-          <a href="https://chat.whatsapp.com/BOgwaqLMfevFd9rhUvijfe?s=cl&p=a&mlu=4" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-community">
-            <svg class="whatsapp-icon" viewBox="0 0 24 24">
-              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.124-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
-            </svg>
-            Únete Maderismo Prime
-          </a>
-        </div>
-      </section>
-
-      <section class="spotify-section">
-        <h2>Lista de Reproducción</h2>
-        <div class="spotify-container">
-          <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/2Iz5JEIGCKSWrhypoqs6fs?si=XKl9DCg-R3elo3GxbrV4Qw&utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        </div>
-      </section>
-
-      <section class="reflection-section">
-        <div class="reflection-quote">
-          <p>El universo no te debe una mierda.</p>
-          <p>No hay karma cósmico, no hay premio por ser buena persona y probablemente a las estrellas les importa un carajo tu drama existencial.</p>
-          <p>Así que sé bueno sin esperar recompensa. Ayuda a alguien. Ama. Perdona. Haz lo correcto.</p>
-          <p>Porque al final, cuando todo termine, el universo ni siquiera va a recordarte.</p>
-          <p>Pero mientras estés hieras… procura no ser otro imbécil más en el planeta.</p>
-        </div>
-      </section>
-
-      <section class="slider-section">
-        <h2>Galería</h2>
-        <div class="slider-container">
-          <button class="slider-btn prev" id="prevBtn" aria-label="Anterior">&#10094;</button>
-          <button class="slider-btn next" id="nextBtn" aria-label="Siguiente">&#10095;</button>
-          
-          <div class="slider-track" id="sliderTrack">
-            <div class="slide"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSO52cxhyIonrjtAAwhzLumTReg2JT1aHKXn9y9o5G8UE-MyZr99i-lUuI&s=10" alt="José Madero 1"></div>
-            <div class="slide"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxOqejHunLPmeKTd52IlbJnhDsP1SJLcRSFuDq6yfDqoU0W8XQPpQ_LmPh&s=10" alt="José Madero 2"></div>
-            <div class="slide"><img src="https://pbs.twimg.com/media/HOqV45MWkAAgcvH.jpg" alt="José Madero 3"></div>
-            <div class="slide"><img src="https://i.postimg.cc/Wpw5z6Cf/ab6761610000e5ebfd5046504bccb6ee5a79b568-(1).jpg" alt="José Madero 4"></div>
-            <div class="slide"><img src="https://punkeando.com.mx/wp-content/uploads/2026/08/Jose-Madero-QUERIDO-1-1536x1024.jpg" alt="José Madero 5"></div>
-            <div class="slide"><img src="https://s.yimg.com/lo/mysterio/api/559fa8f1e4188a2380ac309ff3a1f1167d0356e306e3d9b754b080b7a64bc0ba/lightyear_networkapi/resizefill_w1024_h683%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fes%2Fanimal_pol_tico_619%2F3a8deb20543aea5efebdfebdad974249.jpg" alt="José Madero 6"></div>
+¿Estamos preparados para lo que viene?. <br><br>
+        </p>
+        
+        <div class="countdown-container">
+          <h3 id="countdown-title">Lanzamiento: 3 de Septiembre de 2026</h3>
+          <div class="timer" id="timer">
+            <div class="time-block"><span id="days">00</span><label>Días</label></div>
+            <div class="time-block"><span id="hours">00</span><label>Horas</label></div>
+            <div class="time-block"><span id="minutes">00</span><label>Min</label></div>
+            <div class="time-block"><span id="seconds">00</span><label>Seg</label></div>
           </div>
         </div>
-        <div class="slider-dots" id="sliderDots"></div>
-      </section>
-    </div>
 
-    <!-- Pestaña 2: Sobre Mí -->
-    <div id="tab-sobre-mi" class="tab-content">
-      <div class="about-wrapper">
-        <div class="profile-card">
-          <div class="banner">
-            <div class="banner-overlay"></div>
-            <div class="top-icons">
-              <a href="https://chat.whatsapp.com/KYFqAgQBwL8ICBsEwT56lA?s=cl&p=a&mlu=4" target="_blank" title="Comunidad de WhatsApp">
-                <i class="fa-brands fa-whatsapp"></i>
-              </a>
-              <button class="theme-toggle-btn" id="themeToggle" title="Cambiar tema">
-                <i class="fa-regular fa-moon" id="themeIcon"></i>
-              </button>
-            </div>
-          </div>
+        <a href="https://chat.whatsapp.com/BOgwaqLMfevFd9rhUvijfe?s=cl&p=a&mlu=4" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-community">
+          <svg class="whatsapp-icon" viewBox="0 0 24 24">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.124-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+          </svg>
+          Únete Maderismo Prime
+        </a>
+      </div>
+    </section>
 
-          <div class="profile-header">
-            <div class="avatar-container">
-              <img src="https://i.postimg.cc/Vvfv46T9/Picsart-26-08-25-02-30-05-569.jpg" alt="Foto de perfil" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
-            </div>
-            <a href="https://www.tiktok.com/@yisusarys" target="_blank" class="btn-follow">
-              <i class="fa-brands fa-tiktok"></i> Seguir
-            </a>
-          </div>
+    <section class="spotify-section">
+      <h2>Lista de Reproducción</h2>
+      <div class="spotify-container">
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/2Iz5JEIGCKSWrhypoqs6fs?si=XKl9DCg-R3elo3GxbrV4Qw&utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      </div>
+    </section>
 
-          <div class="profile-body">
-            <div class="user-name">
-              Yisus A.R. <i class="fa-solid fa-circle-check verified-badge"></i>
-            </div>
-            <div class="user-handle">@yisusarys</div>
+    <section class="reflection-section">
+      <div class="reflection-quote">
+        <p>El universo no te debe una mierda.</p>
+        <p>No hay karma cósmico, no hay premio por ser buena persona y probablemente a las estrellas les importa un carajo tu drama existencial.</p>
+        <p>Así que sé bueno sin esperar recompensa. Ayuda a alguien. Ama. Perdona. Haz lo correcto.</p>
+        <p>Porque al final, cuando todo termine, el universo ni siquiera va a recordarte.</p>
+        <p>Pero mientras estés aquí… procura no ser otro imbécil más en el planeta.</p>
+      </div>
+    </section>
 
-            <div class="bio">
-              <p><strong>Traficante de Talento Humano</strong> | Especialista en colocar humanos dentro de corporaciones a cambio de quincenas.</p>
-              <p>Godín de RH por decisión estratégica del capitalismo: desarrollando competencias profesionales antes de tener permitido desarrollar una personalidad.</p>
-              <p><strong>Misión secundaria:</strong> programación, diseño web y edición de fotografía y video. Básicamente, intentando recordar que también tengo habilidades útiles fuera de las juntas que pudieron ser un correo.</p>
-              <p>Actualmente enfocado en generación de ingresos, acumulación de experiencias y documentación de evidencia, con el objetivo de ejecutar una futura transición voluntaria fuera de esta simulación corporativa.</p>
-              <p>Optimizando el perfil de LinkedIn mientras planeo mi escape del sistema. Todo perfectamente alineado a objetivos.</p>
-
-              <div class="interests-tags">
-                <span class="tag"><i class="fa-regular fa-image"></i> Fotografía</span>
-                <span class="tag"><i class="fa-solid fa-film"></i> Cine</span>
-                <span class="tag"><i class="fa-solid fa-compact-disc"></i> Música</span>
-                <span class="tag"><i class="fa-regular fa-compass"></i> Viajes</span>
-              </div>
-
-              <div class="kpi-box">
-                <div><strong>KPI principal:</strong> sobrevivir al Q4.</div>
-                <div><strong>Visión:</strong> escapar del sistema.</div>
-              </div>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="section-title">
-              <i class="fa-brands fa-spotify"></i> Mi Playlist
-            </div>
-            <div class="spotify-profile-container">
-              <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/0yvpDQ6CnatKZVhPKPYFez?si=_NHgwZMqTE6uZmYhV6uhXQ&utmutm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="section-title">
-              <i class="fa-regular fa-camera"></i> Galería
-            </div>
-            
-            <div class="carousel-container" id="carouselContainer">
-              <div class="carousel-track" id="carouselTrack">
-                <div class="carousel-slide">
-                  <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=80" alt="Foto 1">
-                  <div class="carousel-caption">01. Perspectiva & Encuadre</div>
-                </div>
-                <div class="carousel-slide">
-                  <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=800&q=80" alt="Foto 2">
-                  <div class="carousel-caption">02. Exploración Urbana</div>
-                </div>
-                <div class="carousel-slide">
-                  <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=800&q=80" alt="Foto 3">
-                  <div class="carousel-caption">03. Ruta sin rumbo fijo</div>
-                </div>
-                <div class="carousel-slide">
-                  <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="Foto 4">
-                  <div class="carousel-caption">04. Atardeceres & Costas</div>
-                </div>
-                <div class="carousel-slide">
-                  <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80" alt="Foto 5">
-                  <div class="carousel-caption">05. Montañas y Noches</div>
-                </div>
-              </div>
-
-              <div class="carousel-dots" id="carouselDots">
-                <span class="dot-carousel active" data-index="0"></span>
-                <span class="dot-carousel" data-index="1"></span>
-                <span class="dot-carousel" data-index="2"></span>
-                <span class="dot-carousel" data-index="3"></span>
-                <span class="dot-carousel" data-index="4"></span>
-              </div>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="section-title">
-              <i class="fa-regular fa-user"></i> Datos Sobre Mí
-            </div>
-            
-            <div class="about-list">
-              <div class="about-item">
-                <i class="fa-regular fa-circle-play"></i>
-                <div><span class="about-item-label">Fin de semana ideal:</span> Ver películas épicas, escuchar buena música y cero pendientes.</div>
-              </div>
-              <div class="about-item">
-                <i class="fa-regular fa-building"></i>
-                <div><span class="about-item-label">Área laboral:</span> Recursos Humanos (apoyando personas, escuchando y siendo parte de soluciones).</div>
-              </div>
-              <div class="about-item">
-                <i class="fa-solid fa-sliders"></i>
-                <div><span class="about-item-label">Gusto musical:</span> Sin género en particular; si la canción transmite algo, va directo a la playlist.</div>
-              </div>
-              <div class="about-item">
-                <i class="fa-regular fa-compass"></i>
-                <div><span class="about-item-label">Mejor viaje:</span> La primera vez que salí de mi ciudad sin un rumbo fijo (libertad y aventuras).</div>
-              </div>
-              <div class="about-item">
-                <i class="fa-solid fa-utensils"></i>
-                <div><span class="about-item-label">Cena especial:</span> Con mi abuela (para volver a escuchar sus historias).</div>
-              </div>
-              <div class="about-item">
-                <i class="fa-regular fa-face-smile"></i>
-                <div><span class="about-item-label">Percepción vs Realidad:</span> Suelen pensar que soy reservado o serio, pero solo me tomo tiempo para agarrar confianza; luego soy leal a morir.</div>
-              </div>
-              <div class="about-item">
-                <i class="fa-solid fa-seedling"></i>
-                <div><span class="about-item-label">Estilo de vida:</span> Un poco de planear lo importante, pero siempre dejando espacio para que las cosas fluyan.</div>
-              </div>
-              <div class="about-item">
-                <i class="fa-regular fa-heart"></i>
-                <div><span class="about-item-label">En una pareja busca:</span> Acompañamiento, lealtad, apoyo y reírse mucho en equipo.</div>
-              </div>
-              <div class="about-item">
-                <i class="fa-solid fa-mountain"></i>
-                <div><span class="about-item-label">Lección de vida:</span> Nada es para siempre. La vida y las personas son una montaña rusa: hay que disfrutar los altos y aprender de los bajos.</div>
-              </div>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="section-title">
-              <i class="fa-brands fa-tiktok"></i> Playlist de TikTok
-            </div>
-            <div class="clean-player-container">
-              <div class="clean-video-frame">
-                <iframe id="embeddedTikTok" src="https://www.tiktok.com/embed/v2/7676657692445822216?hide_text=1" allow="fullscreen; autoplay; encrypted-media"></iframe>
-              </div>
-              <div class="clean-playlist">
-                <div class="playlist-item active" onclick="playTikTok('7676657692445822216', this)">
-                  <span>01. El Bien y El Mal</span>
-                  <svg class="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                </div>
-                <div class="playlist-item" onclick="playTikTok('7671882209099287815', this)">
-                  <span>02. La Sociedad</span>
-                  <svg class="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                </div>
-                <div class="playlist-item" onclick="playTikTok('7666893344252939527', this)">
-                  <span>03. EL Amor</span>
-                  <svg class="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                </div>
-                <div class="playlist-item" onclick="playTikTok('7664055928773168402', this)">
-                  <span>04. No Eres Especial</span>
-                  <svg class="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                </div>
-                <div class="playlist-item" onclick="playTikTok('7661443692825283848', this)">
-                  <span>05. La Vida</span>
-                  <svg class="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                </div>
-                <div class="playlist-item" onclick="playTikTok('7656133249932070162', this)">
-                  <span>06. El Fracaso</span>
-                  <svg class="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                </div>
-                <div class="playlist-item" onclick="playTikTok('7674764640747883784', this)">
-                  <span>07. La Trampa</span>
-                  <svg class="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="card-footer">
-            &copy; Creado por <strong>Yisus A.R.</strong> &bull; Todos los derechos reservados
-          </div>
+    <section class="slider-section">
+      <h2>Galería</h2>
+      <div class="slider-container">
+        <button class="slider-btn prev" id="prevBtn" aria-label="Anterior">&#10094;</button>
+        <button class="slider-btn next" id="nextBtn" aria-label="Siguiente">&#10095;</button>
+        
+        <div class="slider-track" id="sliderTrack">
+          <div class="slide"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSO52cxhyIonrjtAAwhzLumTReg2JT1aHKXn9y9o5G8UE-MyZr99i-lUuI&s=10" alt="José Madero 1"></div>
+          <div class="slide"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxOqejHunLPmeKTd52IlbJnhDsP1SJLcRSFuDq6yfDqoU0W8XQPpQ_LmPh&s=10" alt="José Madero 2"></div>
+          <div class="slide"><img src="https://pbs.twimg.com/media/HOqV45MWkAAgcvH.jpg" alt="José Madero 3"></div>
+          <div class="slide"><img src="https://i.postimg.cc/Wpw5z6Cf/ab6761610000e5ebfd5046504bccb6ee5a79b568-(1).jpg" alt="José Madero 4"></div>
+          <div class="slide"><img src="https://punkeando.com.mx/wp-content/uploads/2026/08/Jose-Madero-QUERIDO-1-1536x1024.jpg" alt="José Madero 5"></div>
+          <div class="slide"><img src="https://s.yimg.com/lo/mysterio/api/559fa8f1e4188a2380ac309ff3a1f1167d0356e306e3d9b754b080b7a64bc0ba/lightyear_networkapi/resizefill_w1024_h683%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fes%2Fanimal_pol_tico_619%2F3a8deb20543aea5efebdfebdad974249.jpg" alt="José Madero 6"></div>
         </div>
       </div>
-    </div>
+      <div class="slider-dots" id="sliderDots"></div>
+    </section>
   </main>
 
+  <footer>
+    &copy; 2026 &bull; Todos los derechos reservados <strong>Yisus A.R.</strong>
+  </footer>
+
   <script>
-    // Cambio de pestañas
-    function switchTab(tabName) {
-      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-
-      if (tabName === 'album') {
-        document.querySelectorAll('.tab-btn')[0].classList.add('active');
-        document.getElementById('tab-album').classList.add('active');
-      } else if (tabName === 'sobre-mi') {
-        document.querySelectorAll('.tab-btn')[1].classList.add('active');
-        document.getElementById('tab-sobre-mi').classList.add('active');
-      }
-    }
-
-    // Reproductor TikTok
-    function playTikTok(videoId, element) {
-      const iframe = document.getElementById('embeddedTikTok');
-      iframe.src = `https://www.tiktok.com/embed/v2/${videoId}?hide_text=1`;
-
-      document.querySelectorAll('.playlist-item').forEach(item => {
-        item.classList.remove('active');
-      });
-      element.classList.add('active');
-    }
-
-    // Cambio de Tema Claro/Oscuro (Tarjeta Sobre Mí)
-    const themeToggleBtn = document.getElementById('themeToggle');
+    // Lógica para el Modo Oscuro / Claro
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
     const themeIcon = document.getElementById('themeIcon');
-    const aboutWrapper = document.querySelector('.about-wrapper');
+    const bodyEl = document.body;
 
     themeToggleBtn.addEventListener('click', () => {
-      const currentTheme = aboutWrapper.getAttribute('data-theme');
-      if (currentTheme === 'light') {
-        aboutWrapper.removeAttribute('data-theme');
-        themeIcon.className = 'fa-regular fa-moon';
+      const currentTheme = bodyEl.getAttribute('data-theme');
+      if (currentTheme === 'dark') {
+        bodyEl.setAttribute('data-theme', 'light');
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
       } else {
-        aboutWrapper.setAttribute('data-theme', 'light');
-        themeIcon.className = 'fa-regular fa-sun';
+        bodyEl.setAttribute('data-theme', 'dark');
+        themeIcon.classList.remove('fa-sun');
+        themeIcon.classList.add('fa-moon');
       }
     });
-
-    // Carrusel de la tarjeta Sobre Mí
-    const track = document.getElementById('carouselTrack');
-    const slides = Array.from(track.children);
-    const dots = document.querySelectorAll('.dot-carousel');
-    let currentIndex = 0;
-    let autoPlayTimer;
-
-    function updateCarousel(index) {
-      if (index < 0) index = slides.length - 1;
-      if (index >= slides.length) index = 0;
-      currentIndex = index;
-
-      track.style.transform = `translateX(-${currentIndex * 100}%)`;
-
-      dots.forEach((dot, i) => {
-        dot.classList.toggle('active', i === currentIndex);
-      });
-    }
-
-    function startAutoPlay() {
-      autoPlayTimer = setInterval(() => {
-        updateCarousel(currentIndex + 1);
-      }, 4500);
-    }
-
-    function resetAutoPlay() {
-      clearInterval(autoPlayTimer);
-      startAutoPlay();
-    }
-
-    dots.forEach(dot => {
-      dot.addEventListener('click', (e) => {
-        const index = parseInt(e.target.dataset.index);
-        updateCarousel(index);
-        resetAutoPlay();
-      });
-    });
-
-    startAutoPlay();
 
     // Cuenta regresiva del álbum (Configurada para el 3 de septiembre de 2026)
     const targetDate = new Date("2026-09-03T00:00:00").getTime();
