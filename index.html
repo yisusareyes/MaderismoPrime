@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,7 +55,6 @@
       justify-content: space-between;
     }
 
-    /* Botón de Cambio de Tema (Más pequeño y con espacio) */
     .theme-toggle-container {
       position: absolute;
       top: 20px;
@@ -85,7 +84,7 @@
 
     header {
       text-align: center;
-      margin: 45px 0 35px 0; /* Margen superior ajustado para despejar el botón */
+      margin: 45px 0 35px 0;
       position: relative;
     }
 
@@ -128,6 +127,7 @@
       .hero {
         flex-direction: row;
         gap: 45px;
+        align-items: flex-start;
       }
     }
 
@@ -175,6 +175,21 @@
       font-size: 0.9rem;
       margin-bottom: 25px;
       line-height: 1.7;
+    }
+
+    .inline-custom-img {
+      width: 100%;
+      max-width: 100%;
+      border-radius: 8px;
+      margin: 20px 0;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      filter: grayscale(100%);
+      transition: filter 0.4s ease;
+    }
+
+    .inline-custom-img:hover {
+      filter: grayscale(0%);
     }
 
     .countdown-container h3 {
@@ -253,12 +268,13 @@
       fill: currentColor;
     }
 
-    .spotify-section, .reflection-section, .slider-section {
+    /* Secciones Generales */
+    .spotify-section, .reflection-section, .quotes-section, .final-reflection-section, .slider-section {
       max-width: 850px;
       margin: 0 auto 50px auto;
     }
 
-    .spotify-section h2, .reflection-section h2, .slider-section h2 {
+    .spotify-section h2, .reflection-section h2, .quotes-section h2, .final-reflection-section h2, .slider-section h2 {
       text-align: center;
       font-weight: 100;
       font-size: 1.5rem;
@@ -269,12 +285,14 @@
     }
 
     .spotify-container {
+      width: 100%;
       border-radius: 12px;
       overflow: hidden;
       border: 1px solid var(--card-border);
       box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     }
 
+    /* Sección de Reflexión Principal (Letra más pequeña y sin cortar palabras) */
     .reflection-section {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
@@ -286,13 +304,15 @@
 
     .reflection-quote {
       font-family: 'Inter', sans-serif;
-      font-size: 0.95rem;
+      font-size: 0.88rem;
       font-weight: 300;
       color: var(--text-muted);
-      line-height: 1.9;
-      letter-spacing: 0.5px;
+      line-height: 1.8;
+      letter-spacing: 0.3px;
       max-width: 700px;
       margin: 0 auto;
+      word-break: normal;
+      overflow-wrap: break-word;
     }
 
     .reflection-quote p {
@@ -306,6 +326,88 @@
       margin-top: 18px;
     }
 
+    /* Sección de Quotes Automáticas (Letra más pequeña y sin cortar palabras) */
+    .quotes-section {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 40px 30px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+      backdrop-filter: blur(12px);
+    }
+
+    .quote-box {
+      min-height: 100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 1;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      cursor: default;
+    }
+
+    .quote-box.fade-out {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+
+    .quote-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--text-main);
+      line-height: 1.7;
+      letter-spacing: 0.3px;
+      max-width: 700px;
+      margin-bottom: 10px;
+      word-break: normal;
+      overflow-wrap: break-word;
+    }
+
+    .quote-author {
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    /* Sección Reflexión Final (Letra más pequeña y sin cortar palabras) */
+    .final-reflection-section {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 45px 35px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+      backdrop-filter: blur(12px);
+    }
+
+    .final-reflection-content {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      line-height: 1.8;
+      letter-spacing: 0.3px;
+      max-width: 720px;
+      margin: 0 auto;
+      word-break: normal;
+      overflow-wrap: break-word;
+    }
+
+    .final-reflection-content p {
+      margin-bottom: 16px;
+    }
+
+    .final-reflection-content p:last-child {
+      margin-bottom: 0;
+      font-weight: 400;
+      color: var(--text-main);
+      margin-top: 24px;
+      text-align: center;
+    }
+
     .slider-container {
       position: relative;
       width: 100%;
@@ -313,6 +415,7 @@
       border-radius: 12px;
       border: 1px solid var(--card-border);
       background: var(--slider-bg);
+      touch-action: pan-y;
     }
 
     .slider-track {
@@ -328,6 +431,7 @@
       align-items: center;
       justify-content: center;
       background: var(--slider-bg);
+      cursor: pointer;
     }
 
     .slide img {
@@ -386,7 +490,55 @@
       transform: scale(1.2);
     }
 
-    /* Pie de Página */
+    .lightbox-modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(8px);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .lightbox-modal.active {
+      display: flex;
+    }
+
+    .lightbox-content {
+      max-width: 90%;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 25px;
+      right: 30px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--card-border);
+      color: #fff;
+      font-size: 1.5rem;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .lightbox-close:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
     footer {
       text-align: center;
       padding: 24px 20px;
@@ -403,7 +555,7 @@
     }
   </style>
 </head>
-<body data-theme="dark">
+<body>
 
   <div class="theme-toggle-container">
     <button class="theme-btn" id="themeToggleBtn" aria-label="Cambiar modo de color">
@@ -426,9 +578,11 @@
 José Madero ha dejado entrever que su próximo álbum será uno de sus trabajos más personales. Y si algo sabemos, es que cuando José habla desde ese lugar, vienen canciones cargadas de nostalgia, amor, desamor, apoyo y esa pequeña dosis de esperanza que aparece cuando todo parece perdido.<br><br> 
 Quizá este disco no venga a salvarnos.<br><br>
 Quizá venga a decirnos que <br>está bien no estar bien.<br><br>
-¿Estamos preparados para lo que viene?. <br><br>
+¿Estamos preparados para lo que viene?<br><br>
         </p>
         
+        <img class="inline-custom-img" src="https://i.postimg.cc/BbfWhC0P/IMG-20260826-193421.jpg" alt="José Madero Querido Visual" loading="lazy">
+
         <div class="countdown-container">
           <h3 id="countdown-title">Lanzamiento: 3 de Septiembre de 2026</h3>
           <div class="timer" id="timer">
@@ -448,6 +602,7 @@ Quizá venga a decirnos que <br>está bien no estar bien.<br><br>
       </div>
     </section>
 
+    <!-- Sección Spotify -->
     <section class="spotify-section">
       <h2>Lista de Reproducción</h2>
       <div class="spotify-container">
@@ -455,59 +610,102 @@ Quizá venga a decirnos que <br>está bien no estar bien.<br><br>
       </div>
     </section>
 
+    <!-- Sección de Reflexión Principal -->
     <section class="reflection-section">
       <div class="reflection-quote">
         <p>El universo no te debe una mierda.</p>
         <p>No hay karma cósmico, no hay premio por ser buena persona y probablemente a las estrellas les importa un carajo tu drama existencial.</p>
         <p>Así que sé bueno sin esperar recompensa. Ayuda a alguien. Ama. Perdona. Haz lo correcto.</p>
         <p>Porque al final, cuando todo termine, el universo ni siquiera va a recordarte.</p>
-        <p>Pero mientras estés aquí… procura no ser otro imbécil más en el planeta.</p>
+        <p>Pero mientras estés fuera… procura no ser otro imbécil más en el planeta.</p>
       </div>
     </section>
 
+    <!-- Sección: Frases Interactivas Automáticas (Sin botón manual) -->
+    <section class="quotes-section" id="quotesSection">
+      <h2>En Sus Palabras</h2>
+      <div class="quote-box" id="quoteBox">
+        <p class="quote-text" id="quoteText">"De todos los errores aprendemos y cambiamos para bien, no somos máquinas."</p>
+        <span class="quote-author">— José Madero</span>
+      </div>
+    </section>
+
+    <!-- Sección Reflexión Final -->
+    <section class="final-reflection-section">
+      <h2>Aprender a vivir con las grietas</h2>
+      <div class="final-reflection-content">
+        <p>Supongo que con el tiempo uno aprende que no existe una versión definitiva de nosotros mismos. Nos equivocamos, nos arrepentimos, cambiamos de opinión, nos rompemos un poco y después intentamos reconstruirnos con lo que queda.</p>
+        <p>También aprendí que las inseguridades nunca desaparecen por completo. Simplemente aprendemos a convivir con ellas. A veces incluso terminan siendo parte de lo que hacemos, de lo que creamos y de la manera en que vemos el mundo.</p>
+        <p>Quizá por eso los momentos más difíciles terminan siendo los más honestos. Cuando todo está bien, es fácil fingir. Cuando estás perdido, triste o cuestionándote absolutamente todo, ya no hay demasiado que esconder.</p>
+        <p>Y entonces aparece esa pregunta incómoda:<br><strong>¿Toda esta chinga que se viene, ¿para qué?</strong><br>No siempre tengo una respuesta.</p>
+        <p>Tal vez tampoco sea necesario tenerla.<br>Quizá se trata de seguir haciendo aquello que nos importa, aunque nadie nos garantice que valdrá la pena. Crear aunque duela. Amar aunque termine. Equivocarnos aunque exista la posibilidad de volver a equivocarnos.</p>
+        <p>Porque al final no quiero pasar por esta vida intentando ser gris para encajar.<br>Prefiero equivocarme siendo yo.</p>
+        <p>Prefiero dejar algo que simplemente pasar por aquí.</p>
+        <p>Y si alguna vez todo se vuelve demasiado pesado, quizá solamente haya que recordar que no somos máquinas. Estamos hechos de errores, inseguridades, recuerdos, pérdidas y momentos felices.</p>
+        <p>Estamos un poco rotos. Todos. Y quizá aprender a vivir con eso sea una de las pocas formas honestas que tenemos de seguir adelante.</p>
+      </div>
+    </section>
+
+    <!-- Sección de Galería / Slider -->
     <section class="slider-section">
       <h2>Galería</h2>
-      <div class="slider-container">
+      <div class="slider-container" id="sliderContainer">
         <button class="slider-btn prev" id="prevBtn" aria-label="Anterior">&#10094;</button>
         <button class="slider-btn next" id="nextBtn" aria-label="Siguiente">&#10095;</button>
         
         <div class="slider-track" id="sliderTrack">
-          <div class="slide"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSO52cxhyIonrjtAAwhzLumTReg2JT1aHKXn9y9o5G8UE-MyZr99i-lUuI&s=10" alt="José Madero 1"></div>
-          <div class="slide"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxOqejHunLPmeKTd52IlbJnhDsP1SJLcRSFuDq6yfDqoU0W8XQPpQ_LmPh&s=10" alt="José Madero 2"></div>
-          <div class="slide"><img src="https://pbs.twimg.com/media/HOqV45MWkAAgcvH.jpg" alt="José Madero 3"></div>
-          <div class="slide"><img src="https://i.postimg.cc/Wpw5z6Cf/ab6761610000e5ebfd5046504bccb6ee5a79b568-(1).jpg" alt="José Madero 4"></div>
-          <div class="slide"><img src="https://punkeando.com.mx/wp-content/uploads/2026/08/Jose-Madero-QUERIDO-1-1536x1024.jpg" alt="José Madero 5"></div>
-          <div class="slide"><img src="https://s.yimg.com/lo/mysterio/api/559fa8f1e4188a2380ac309ff3a1f1167d0356e306e3d9b754b080b7a64bc0ba/lightyear_networkapi/resizefill_w1024_h683%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fes%2Fanimal_pol_tico_619%2F3a8deb20543aea5efebdfebdad974249.jpg" alt="José Madero 6"></div>
+          <div class="slide"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSO52cxhyIonrjtAAwhzLumTReg2JT1aHKXn9y9o5G8UE-MyZr99i-lUuI&s=10" alt="José Madero 1" loading="lazy"></div>
+          <div class="slide"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxOqejHunLPmeKTd52IlbJnhDsP1SJLcRSFuDq6yfDqoU0W8XQPpQ_LmPh&s=10" alt="José Madero 2" loading="lazy"></div>
+          <div class="slide"><img src="https://pbs.twimg.com/media/HOqV45MWkAAgcvH.jpg" alt="José Madero 3" loading="lazy"></div>
+          <div class="slide"><img src="https://i.postimg.cc/Wpw5z6Cf/ab6761610000e5ebfd5046504bccb6ee5a79b568-(1).jpg" alt="José Madero 4" loading="lazy"></div>
+          <div class="slide"><img src="https://punkeando.com.mx/wp-content/uploads/2026/08/Jose-Madero-QUERIDO-1-1536x1024.jpg" alt="José Madero 5" loading="lazy"></div>
+          <div class="slide"><img src="https://s.yimg.com/lo/mysterio/api/559fa8f1e4188a2380ac309ff3a1f1167d0356e306e3d9b754b080b7a64bc0ba/lightyear_networkapi/resizefill_w1024_h683%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fes%2Fanimal_pol_tico_619%2F3a8deb20543aea5efebdfebdad974249.jpg" alt="José Madero 6" loading="lazy"></div>
         </div>
       </div>
       <div class="slider-dots" id="sliderDots"></div>
     </section>
   </main>
 
+  <!-- Modal Lightbox Pantalla Completa -->
+  <div class="lightbox-modal" id="lightboxModal">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar">&times;</button>
+    <img class="lightbox-content" id="lightboxImg" src="" alt="Imagen ampliada">
+  </div>
+
   <footer>
     &copy; 2026 &bull; Todos los derechos reservados <strong>Yisus A.R.</strong>
   </footer>
 
   <script>
-    // Lógica para el Modo Oscuro / Claro
+    // 1. Gestión de Tema con LocalStorage
     const themeToggleBtn = document.getElementById('themeToggleBtn');
     const themeIcon = document.getElementById('themeIcon');
     const bodyEl = document.body;
 
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    bodyEl.setAttribute('data-theme', savedTheme);
+    updateThemeIcon(savedTheme);
+
     themeToggleBtn.addEventListener('click', () => {
       const currentTheme = bodyEl.getAttribute('data-theme');
-      if (currentTheme === 'dark') {
-        bodyEl.setAttribute('data-theme', 'light');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      
+      bodyEl.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateThemeIcon(newTheme);
+    });
+
+    function updateThemeIcon(theme) {
+      if (theme === 'light') {
         themeIcon.classList.remove('fa-moon');
         themeIcon.classList.add('fa-sun');
       } else {
-        bodyEl.setAttribute('data-theme', 'dark');
         themeIcon.classList.remove('fa-sun');
         themeIcon.classList.add('fa-moon');
       }
-    });
+    }
 
-    // Cuenta regresiva del álbum (Configurada para el 3 de septiembre de 2026)
+    // 2. Cuenta regresiva optimizada
     const targetDate = new Date("2026-09-03T00:00:00").getTime();
 
     function updateCountdown() {
@@ -537,11 +735,51 @@ Quizá venga a decirnos que <br>está bien no estar bien.<br><br>
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // Slider del Álbum
+    // 3. Sistema de Quotes Interactivas con Auto-play y pausa al pasar el cursor (Sin botón manual)
+    const quotes = [
+      "De todos los errores aprendemos y cambiamos para bien, no somos máquinas.",
+      "Cuando peor la paso, es cuando hago el arte más profundo y más honesto.",
+      "No busco hits, busco trascender.",
+      "Si estoy triste, si estoy contento, saco toda mi vida.",
+      "Pienso que no se debe ser gris. El gris mata.",
+      "Todos tenemos nuestras inseguridades, nada más que las mías están un poco más marcadas.",
+      "Todos estamos rotos de alguna manera y hay que aprender a vivir con eso.",
+      "Toda esta chinga que se viene, ¿para qué?"
+    ];
+
+    let currentQuoteIndex = 0;
+    const quoteBox = document.getElementById('quoteBox');
+    const quoteText = document.getElementById('quoteText');
+    const quotesSection = document.getElementById('quotesSection');
+    let quoteInterval;
+
+    function showNextQuote() {
+      quoteBox.classList.add('fade-out');
+      setTimeout(() => {
+        currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
+        quoteText.innerText = `"${quotes[currentQuoteIndex]}"`;
+        quoteBox.classList.remove('fade-out');
+      }, 300);
+    }
+
+    function startQuoteTimer() {
+      quoteInterval = setInterval(showNextQuote, 5000);
+    }
+
+    // Pausar al pasar el cursor por toda la sección de frases y reanudar al salir
+    quotesSection.addEventListener('mouseenter', () => clearInterval(quoteInterval));
+    quotesSection.addEventListener('mouseleave', () => startQuoteTimer());
+
+    // Iniciar temporizador automático de frases
+    startQuoteTimer();
+
+    // 4. Slider avanzado con Auto-play, Dots y Gestos Táctiles (Swipe)
     let currentSlide = 0;
     const albumSlides = document.querySelectorAll('.slider-track .slide');
     const albumTrack = document.getElementById('sliderTrack');
     const albumDotsContainer = document.getElementById('sliderDots');
+    const sliderContainer = document.getElementById('sliderContainer');
+    let slideInterval;
 
     function goToSlide(index) {
       if (index < 0) {
@@ -563,16 +801,84 @@ Quizá venga a decirnos que <br>está bien no estar bien.<br><br>
       if (index === 0) dot.classList.add('active');
       dot.addEventListener('click', () => {
         goToSlide(index);
+        resetTimer();
       });
       albumDotsContainer.appendChild(dot);
     });
 
     document.getElementById('nextBtn').addEventListener('click', () => {
       goToSlide(currentSlide + 1);
+      resetTimer();
     });
 
     document.getElementById('prevBtn').addEventListener('click', () => {
       goToSlide(currentSlide - 1);
+      resetTimer();
+    });
+
+    function startTimer() {
+      slideInterval = setInterval(() => {
+        goToSlide(currentSlide + 1);
+      }, 5000);
+    }
+
+    function resetTimer() {
+      clearInterval(slideInterval);
+      startTimer();
+    }
+
+    sliderContainer.addEventListener('mouseenter', () => clearInterval(slideInterval));
+    sliderContainer.addEventListener('mouseleave', () => startTimer());
+
+    startTimer();
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    sliderContainer.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, {passive: true});
+
+    sliderContainer.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, {passive: true});
+
+    function handleSwipe() {
+      if (touchEndX < touchStartX - 50) {
+        goToSlide(currentSlide + 1);
+        resetTimer();
+      }
+      if (touchEndX > touchStartX + 50) {
+        goToSlide(currentSlide - 1);
+        resetTimer();
+      }
+    }
+
+    // 5. Lógica del Lightbox (Pantalla Completa)
+    const lightboxModal = document.getElementById('lightboxModal');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxClose = document.getElementById('lightboxClose');
+
+    albumSlides.forEach((slide) => {
+      const img = slide.querySelector('img');
+      slide.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightboxModal.classList.add('active');
+        clearInterval(slideInterval);
+      });
+    });
+
+    function closeLightbox() {
+      lightboxModal.classList.remove('active');
+      startTimer();
+    }
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxModal.addEventListener('click', (e) => {
+      if (e.target === lightboxModal) {
+        closeLightbox();
+      }
     });
   </script>
 </body>
